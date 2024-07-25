@@ -1,4 +1,4 @@
-package com.user.home;
+package com.user.IntArear;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
