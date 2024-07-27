@@ -1,10 +1,12 @@
 package com.user.IntArear.utils;
 
+import com.user.IntArear.dto.MemberResponseDto;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.Optional;
 
@@ -12,7 +14,7 @@ import java.util.Optional;
 @NoArgsConstructor
 public class SecurityUtil {
 
-    public static Optional<String> getCurrentUsername() {
+    public static Optional<MemberResponseDto> getCurrentMember() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication == null) {
@@ -20,13 +22,13 @@ public class SecurityUtil {
             return Optional.empty();
         }
 
-        String username = null;
-        if (authentication.getPrincipal() instanceof UserDetails userDetails) {
-            username = userDetails.getUsername();
-        } else if (authentication.getPrincipal() instanceof String) {
-            username = (String) authentication.getPrincipal();
-        }
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String role = String.valueOf(userDetails.getAuthorities().stream().findFirst()
+                .orElseThrow(() -> new UsernameNotFoundException("User not found")));
 
-        return Optional.ofNullable(username);
+        return Optional.of(MemberResponseDto.builder()
+                .email(userDetails.getUsername())
+                .role(role)
+                .build());
     }
 }

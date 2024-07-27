@@ -1,4 +1,4 @@
-package com.user.IntArear.security;
+package com.user.IntArear.service;
 
 import com.user.IntArear.repository.MemberRepository;
 import com.user.IntArear.entity.Member;

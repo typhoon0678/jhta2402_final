@@ -1,4 +1,4 @@
-package com.user.IntArear.enums;
+package com.user.IntArear.entity.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

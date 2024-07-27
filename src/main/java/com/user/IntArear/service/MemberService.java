@@ -1,7 +1,7 @@
 package com.user.IntArear.service;
 
 import com.user.IntArear.dto.MemberRequestDto;
-import com.user.IntArear.enums.Role;
+import com.user.IntArear.entity.enums.Role;
 import com.user.IntArear.repository.MemberRepository;
 import com.user.IntArear.entity.Member;
 import lombok.RequiredArgsConstructor;

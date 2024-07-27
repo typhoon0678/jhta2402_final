@@ -1,4 +1,4 @@
-package com.user.IntArear.jwt;
+package com.user.IntArear.utils.jwt;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;

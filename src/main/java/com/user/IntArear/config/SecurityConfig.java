@@ -1,9 +1,9 @@
 package com.user.IntArear.config;
 
-import com.user.IntArear.jwt.JwtSecurityConfig;
-import com.user.IntArear.jwt.TokenProvider;
-import com.user.IntArear.jwt.error.JwtAccessDeniedHandler;
-import com.user.IntArear.jwt.error.JwtAuthenticationEntryPoint;
+import com.user.IntArear.utils.jwt.JwtSecurityConfig;
+import com.user.IntArear.utils.jwt.TokenProvider;
+import com.user.IntArear.utils.jwt.error.JwtAccessDeniedHandler;
+import com.user.IntArear.utils.jwt.error.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

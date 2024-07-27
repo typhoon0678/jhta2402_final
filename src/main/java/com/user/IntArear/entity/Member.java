@@ -1,6 +1,6 @@
 package com.user.IntArear.entity;
 
-import com.user.IntArear.enums.Role;
+import com.user.IntArear.entity.enums.Role;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.user.IntArear.jwt.error;
+package com.user.IntArear.utils.jwt.error;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

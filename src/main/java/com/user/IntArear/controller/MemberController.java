@@ -2,13 +2,12 @@ package com.user.IntArear.controller;
 
 import com.user.IntArear.dto.MemberRequestDto;
 import com.user.IntArear.dto.MemberResponseDto;
-import com.user.IntArear.jwt.TokenProvider;
+import com.user.IntArear.utils.SecurityUtil;
+import com.user.IntArear.utils.jwt.TokenProvider;
 import com.user.IntArear.service.MemberService;
-import io.jsonwebtoken.Claims;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,14 +18,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 public class MemberController {
 
-    private static final Logger log = LoggerFactory.getLogger(MemberController.class);
     private final MemberService memberService;
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -56,16 +54,13 @@ public class MemberController {
     }
 
     @GetMapping("/member/info")
-    public ResponseEntity<MemberResponseDto> getMemberInfo(Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        String role = String.valueOf(userDetails.getAuthorities().stream().findFirst()
-                .orElseThrow(() -> new UsernameNotFoundException("User not found")));
+    public ResponseEntity<MemberResponseDto> getMemberInfo() {
 
-        MemberResponseDto memberInfo = MemberResponseDto.builder()
-                .email(authentication.getName())
-                .role(role)
-                .build();
+        Optional<MemberResponseDto> optionalMemberResponseDto = SecurityUtil.getCurrentMember();
 
-        return ResponseEntity.ok().body(memberInfo);
+        return optionalMemberResponseDto.map(memberResponseDto ->
+                        ResponseEntity.ok().body(memberResponseDto))
+                .orElseGet(() ->
+                        ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 }

@@ -1,4 +1,4 @@
-package com.user.IntArear.jwt;
+package com.user.IntArear.utils.jwt;
 
 import jakarta.servlet.http.Cookie;
 import lombok.RequiredArgsConstructor;
